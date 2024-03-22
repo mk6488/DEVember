@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
   text: {
     color: "#9f4521",
     fontSize: 70,
+    fontFamily: "AmaticBold",
   },
 });
