@@ -1,35 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import { FlatList, StyleSheet, View } from "react-native";
 import DayListItem from "../components/core/DayListItem";
-
-import {
-  useFonts,
-  AmaticSC_400Regular,
-  AmaticSC_700Bold,
-} from "@expo-google-fonts/amatic-sc";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-
-SplashScreen.preventAutoHideAsync();
+import { StatusBar } from "expo-status-bar";
 
 const days = [...Array(24)].map((val, index) => index + 1);
 
 export default function HomeScreen() {
-  const [fontsLoaded, fontError] = useFonts({
-    Amatic: AmaticSC_400Regular,
-    AmaticBold: AmaticSC_700Bold,
-  });
-
-  useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
-
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
-
   return (
     <View style={styles.container}>
       <FlatList
