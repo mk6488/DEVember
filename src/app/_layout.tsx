@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import {
   useFonts,
   Inter_900Black,
@@ -9,14 +13,17 @@ import {
   AmaticSC_400Regular,
   AmaticSC_700Bold,
 } from "@expo-google-fonts/amatic-sc";
-import * as SplashScreen from "expo-splash-screen";
-import { Stack } from "expo-router";
-import { useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-SplashScreen.preventAutoHideAsync();
+import * as SplashScreen from "expo-splash-screen";
+import AnimatedSplashScreen from "@/components/day4/AnimatedSplashScreen";
+import Animated, { FadeIn } from "react-native-reanimated";
+
+// SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [appReady, setAppReady] = useState(false);
+  const [splashAnimationFinished, setSplashAnimationFinished] = useState(false);
+
   const [fontsLoaded, fontError] = useFonts({
     InterReg: Inter_400Regular,
     InterSemi: Inter_600SemiBold,
@@ -28,19 +35,27 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
+      // SplashScreen.hideAsync();
+      setAppReady(true);
     }
   }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded && !fontError) {
-    return null;
+  const showAnimatedSplash = !appReady || !splashAnimationFinished;
+  if (showAnimatedSplash) {
+    return (
+      <AnimatedSplashScreen
+        onAnimationFinish={() => setSplashAnimationFinished(true)}
+      />
+    );
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack screenOptions={{}}>
-        <Stack.Screen name="index" options={{ title: "DEVember" }} />
-      </Stack>
+      <Animated.View style={{ flex: 1 }} entering={FadeIn.duration(500)}>
+        <Stack screenOptions={{}}>
+          <Stack.Screen name="index" options={{ title: "DEVember" }} />
+        </Stack>
+      </Animated.View>
     </GestureHandlerRootView>
   );
 }

@@ -1,5 +1,5 @@
 import { View, StyleSheet, TextInput, Text, Pressable } from "react-native";
-import MarkdownDisplay from "@/components/day3/MarkdownDisplay";
+import MarkdownDisplay from "@components/day3/MarkdownDisplay";
 import { useState } from "react";
 
 const template = `

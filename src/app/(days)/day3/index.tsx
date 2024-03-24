@@ -1,4 +1,4 @@
-import MarkdownDisplay from "@/components/day3/MarkdownDisplay";
+import MarkdownDisplay from "@components/day3/MarkdownDisplay";
 import { Link, Stack } from "expo-router";
 import { Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
