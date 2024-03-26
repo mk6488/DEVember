@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "latitude": 37.7749,
+    "longitude": -122.4194,
+    "price": 150,
+    "title": "Cozy Studio in Downtown SF",
+    "numberOfStars": 4,
+    "rating": 8.5,
+    "image": "https://example.com/image1.jpg"
+  },
+  {
+    "id": 2,
+    "latitude": 37.773972,
+    "longitude": -122.431297,
+    "price": 200,
+    "title": "Luxury Apartment with Bay View",
+    "numberOfStars": 5,
+    "rating": 9.2,
+    "image": "https://example.com/image2.jpg"
+  },
+  {
+    "id": 3,
+    "latitude": 37.7823,
+    "longitude": -122.4108,
+    "price": 120,
+    "title": "Charming Victorian Home in Mission District",
+    "numberOfStars": 4,
+    "rating": 8.0,
+    "image": "https://example.com/image3.jpg"
+  },
+  {
+    "id": 4,
+    "latitude": 37.7909,
+    "longitude": -122.4017,
+    "price": 180,
+    "title": "Modern Loft in SOMA",
+    "numberOfStars": 4,
+    "rating": 8.7,
+    "image": "https://example.com/image4.jpg"
+  },
+  {
+    "id": 5,
+    "latitude": 37.7876,
+    "longitude": -122.3969,
+    "price": 250,
+    "title": "Penthouse Suite with Golden Gate View",
+    "numberOfStars": 5,
+    "rating": 9.5,
+    "image": "https://example.com/image5.jpg"
+  }
+]
