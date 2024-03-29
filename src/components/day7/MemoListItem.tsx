@@ -72,7 +72,9 @@ export default function MemoListItem({ uri }: { uri: string }) {
   const position = status?.isLoaded ? status.positionMillis : 0;
   const duration = status?.isLoaded ? status.durationMillis : 1;
 
-  const progress = position / duration;
+  const durationValue = typeof duration === "number" ? duration : 1;
+
+  const progress = position / durationValue;
 
   const animatedIndicatorStyle = useAnimatedStyle(() => ({
     left: withTiming(`${progress * 100}%`, {
