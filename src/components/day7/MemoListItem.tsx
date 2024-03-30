@@ -4,22 +4,33 @@ import { useCallback, useEffect, useState } from "react";
 import { AVPlaybackStatus, Audio } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
 import Animated, {
+  Extrapolation,
+  interpolate,
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
 
-export default function MemoListItem({ uri }: { uri: string }) {
+export type Memo = {
+  uri: string;
+  metering: number[];
+};
+
+export default function MemoListItem({ memo }: { memo: Memo }) {
   const [sound, setSound] = useState<Sound>();
   const [status, setStatus] = useState<AVPlaybackStatus>();
 
   async function loadSound() {
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(
-      { uri },
+      { uri: memo.uri },
       { progressUpdateIntervalMillis: 1000 / 60 },
       onPlaybackStatusUpdate
     );
     setSound(sound);
+
+    sound.setOnAudioSampleReceived((sample) =>
+      console.log(JSON.stringify(sample, null, 2))
+    );
   }
 
   const onPlaybackStatusUpdate = useCallback(
@@ -39,7 +50,7 @@ export default function MemoListItem({ uri }: { uri: string }) {
 
   useEffect(() => {
     loadSound();
-  }, [uri]);
+  }, [memo]);
 
   async function playSound() {
     if (!sound) {
@@ -83,6 +94,25 @@ export default function MemoListItem({ uri }: { uri: string }) {
     }),
   }));
 
+  console.log(memo);
+
+  // const lines = memo.metering.slice(0, 10);
+  let lines = [];
+  let numLines = 50;
+
+  for (let i = 0; i < numLines; i++) {
+    const meteringIndex = Math.floor((i * memo.metering.length) / numLines);
+    const nextMeteringIndex = Math.ceil(
+      ((i + 1) * memo.metering.length) / numLines
+    );
+    const values = memo.metering.slice(meteringIndex, nextMeteringIndex);
+    const average = values.reduce((sum, a) => sum + a, 0) / values.length;
+    // lines.push(memo.metering[meteringIndex]);
+    lines.push(average);
+  }
+
+  memo.metering.forEach((db, index) => {});
+
   return (
     <View style={styles.container}>
       <FontAwesome5
@@ -92,17 +122,39 @@ export default function MemoListItem({ uri }: { uri: string }) {
         color={"gray"}
       />
       <View style={styles.playbackContainer}>
-        <View style={styles.playbackBackground} />
-        <Animated.View
+        {/* <View style={styles.playbackBackground} /> */}
+
+        <View style={styles.wave}>
+          {lines.map((db, index) => (
+            <View
+              style={[
+                styles.waveLine,
+                {
+                  height: interpolate(
+                    db,
+                    [-60, 0],
+                    [5, 50],
+                    Extrapolation.CLAMP
+                  ),
+                  backgroundColor:
+                    progress > index / lines.length ? "royalblue" : "gainsboro",
+                },
+              ]}
+            />
+          ))}
+        </View>
+
+        {/* <Animated.View
           style={[styles.playbackIndicator, animatedIndicatorStyle]}
-        />
+        /> */}
+
         <Text
           style={{
             position: "absolute",
             right: 0,
             bottom: 0,
             color: "gray",
-            fontFamily: "Inter",
+            fontFamily: "InterReg",
             fontSize: 12,
           }}
         >
@@ -137,7 +189,7 @@ const styles = StyleSheet.create({
   },
   playbackContainer: {
     flex: 1,
-    height: 50,
+    height: 80,
     justifyContent: "center",
   },
   playbackBackground: {
@@ -151,5 +203,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "royalblue",
     position: "absolute",
+  },
+
+  //waves
+  wave: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+  },
+  waveLine: {
+    flex: 1,
+    height: 30,
+    backgroundColor: "gainsboro",
+    borderRadius: 20,
   },
 });
