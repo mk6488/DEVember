@@ -110,6 +110,7 @@ export default function WeatherScreen() {
         `https://api.unsplash.com/search/photos?page=1&query=${weather?.weather[0].main}&client_id=${UNSPLASH_ACCESS_KEY}`
       );
       const data = await result.json();
+      setBgPhotoUrl(data.results[0].urls.raw);
     } catch (error) {
       console.error(error);
     }
