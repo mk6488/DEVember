@@ -107,7 +107,7 @@ export default function WeatherScreen() {
   const fetchPhotosFromApi = async () => {
     try {
       const result = await fetch(
-        `https://api.unsplash.com/search/photos?page=1&query=${weather?.weather[0].main}&client_id=${UNSPLASH_ACCESS_KEY}`
+        `https://api.unsplash.com/search/photos?page=1&query=weather%20${weather?.weather[0].main}&client_id=${UNSPLASH_ACCESS_KEY}`
       );
       const data = await result.json();
       setBgPhotoUrl(data.results[0].urls.raw);

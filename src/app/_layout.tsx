@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "@/amplifyconfiguration.json";
+Amplify.configure(amplifyconfig);
+
 import {
   useFonts,
   Inter_900Black,
