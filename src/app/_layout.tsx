@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
-import { Amplify } from "aws-amplify";
-import amplifyconfig from "@/amplifyconfiguration.json";
-Amplify.configure(amplifyconfig);
-
 import {
   useFonts,
   Inter_900Black,
@@ -21,6 +16,10 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import AnimatedSplashScreen from "@/components/day4/AnimatedSplashScreen";
 import Animated, { FadeIn } from "react-native-reanimated";
+
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "@/amplifyconfiguration.json";
+Amplify.configure(amplifyconfig);
 
 // SplashScreen.preventAutoHideAsync();
 
