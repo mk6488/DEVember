@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const description = `
   # Authentication
-
   AWS Amplify v6 Authentication
 `;
 

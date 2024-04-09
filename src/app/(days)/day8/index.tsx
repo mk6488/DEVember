@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const description = `
   # Weather App
-
   Fetch weather data and display it
 `;
 

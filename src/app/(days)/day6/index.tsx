@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const description = `
   # Tinder Swipe Animation
-
   Let's build the Tinder Swipe Animation in React Native using Reanimated
 `;
 

@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const description = `
   # Voice Memos
-
   Work with the Microphone and Audio playback
 `;
 
