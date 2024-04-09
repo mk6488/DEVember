@@ -3,10 +3,10 @@ import React from "react";
 
 export default function ProtectedScreen() {
   return (
-    <View>
+    <View style={{ padding: 10 }}>
       <Text style={{ fontFamily: "InterBold", fontSize: 30 }}>Hello there</Text>
       <Text style={{ fontFamily: "InterSemi", fontSize: 20, color: "gray" }}>
-        You should only see this page if you are Authenticated
+        You should see this page only if you are Authenticated
       </Text>
     </View>
   );
