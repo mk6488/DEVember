@@ -1,5 +1,8 @@
 import { Slot } from "expo-router";
+import { withAuthenticator } from "@aws-amplify/ui-react-native";
 
-export default function ProtectedLayout() {
+function ProtectedLayout() {
   return <Slot />;
 }
+
+export default withAuthenticator(ProtectedLayout);

@@ -15,7 +15,7 @@ export default function DayDetailsScreen() {
       <MarkdownDisplay>{description}</MarkdownDisplay>
 
       <Link href={"/day9/protected"} asChild>
-        <Button title="Go to Proteted Page" />
+        <Button title="Go to Proteted App" />
       </Link>
     </SafeAreaView>
   );

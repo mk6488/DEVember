@@ -13,15 +13,26 @@ import {
   AmaticSC_700Bold,
 } from "@expo-google-fonts/amatic-sc";
 
-import * as SplashScreen from "expo-splash-screen";
 import AnimatedSplashScreen from "@/components/day4/AnimatedSplashScreen";
 import Animated, { FadeIn } from "react-native-reanimated";
+import {
+  ThemeProvider,
+  Theme,
+  defaultDarkModeOverride,
+} from "@aws-amplify/ui-react-native";
 
 import { Amplify } from "aws-amplify";
 import amplifyconfig from "@/amplifyconfiguration.json";
 Amplify.configure(amplifyconfig);
 
-// SplashScreen.preventAutoHideAsync();
+const theme: Theme = {
+  tokens: {
+    borderWidths: {
+      large: "1rem",
+    },
+  },
+  overrides: [defaultDarkModeOverride],
+};
 
 export default function RootLayout() {
   const [appReady, setAppReady] = useState(false);
@@ -38,7 +49,6 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
-      // SplashScreen.hideAsync();
       setAppReady(true);
     }
   }, [fontsLoaded, fontError]);
@@ -53,12 +63,14 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Animated.View style={{ flex: 1 }} entering={FadeIn.duration(500)}>
-        <Stack screenOptions={{}}>
-          <Stack.Screen name="index" options={{ title: "DEVember" }} />
-        </Stack>
-      </Animated.View>
-    </GestureHandlerRootView>
+    <ThemeProvider theme={theme}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Animated.View style={{ flex: 1 }} entering={FadeIn.duration(500)}>
+          <Stack screenOptions={{}}>
+            <Stack.Screen name="index" options={{ title: "DEVember" }} />
+          </Stack>
+        </Animated.View>
+      </GestureHandlerRootView>
+    </ThemeProvider>
   );
 }
