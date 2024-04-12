@@ -23,6 +23,7 @@ import {
 
 import { Amplify } from "aws-amplify";
 import amplifyconfig from "@/amplifyconfiguration.json";
+import BiometricsProvider from "@/components/day10/BiometricsProvider";
 Amplify.configure(amplifyconfig);
 
 const theme: Theme = {
@@ -63,14 +64,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Animated.View style={{ flex: 1 }} entering={FadeIn.duration(500)}>
-          <Stack screenOptions={{}}>
-            <Stack.Screen name="index" options={{ title: "DEVember" }} />
-          </Stack>
-        </Animated.View>
-      </GestureHandlerRootView>
-    </ThemeProvider>
+    <BiometricsProvider>
+      <ThemeProvider theme={theme}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Animated.View style={{ flex: 1 }} entering={FadeIn.duration(500)}>
+            <Stack screenOptions={{}}>
+              <Stack.Screen name="index" options={{ title: "DEVember" }} />
+            </Stack>
+          </Animated.View>
+        </GestureHandlerRootView>
+      </ThemeProvider>
+    </BiometricsProvider>
   );
 }

@@ -1,0 +1,9 @@
+/ios/Pods/Headers/Public/glog/glog/logging.h
+
+CHANGE:
+#include "glog/log_severity.h"
+#include "glog/vlog_is_on.h"
+
+TO:
+#include "glog/glog/log_severity.h"
+#include "glog/glog/vlog_is_on.h"

@@ -30,7 +30,7 @@ export default function TinderScreen() {
   }, [index]);
 
   const onResponse = (res: boolean) => {
-    console.log("on Response", res);
+    // console.log("on Response", res);
   };
 
   return (

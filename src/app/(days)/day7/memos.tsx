@@ -23,7 +23,6 @@ export default function MemosScreen() {
       setAudioMetering([]);
 
       if (!permissionResponse || permissionResponse.status !== "granted") {
-        console.log("Requesting permission..");
         await requestPermission();
       }
       await Audio.setAudioModeAsync({
@@ -31,17 +30,14 @@ export default function MemosScreen() {
         playsInSilentModeIOS: true,
       });
 
-      console.log("Starting recording..");
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.HIGH_QUALITY,
         undefined,
         100
       );
       setRecording(recording);
-      console.log("Recording started");
 
       recording.setOnRecordingStatusUpdate((status) => {
-        console.log(status.metering);
         if (status.metering) {
           metering.value = status.metering;
           setAudioMetering((curVal) => [...curVal, status.metering || -100]);
@@ -57,14 +53,12 @@ export default function MemosScreen() {
       return;
     }
 
-    console.log("Stopping recording..");
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
     });
     const uri = recording.getURI();
-    console.log("Recording stopped and stored at", uri);
     metering.value = -100;
 
     if (uri) {
